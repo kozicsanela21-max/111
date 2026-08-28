@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: qianchuan-proxy
+    runtime: docker
+    dockerfilePath: ./server/Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: QIANCHUAN_APP_ID
+        value: 1874646807765145
+      - key: QIANCHUAN_APP_SECRET
+        sync: false
+      - key: QIANCHUAN_REDIRECT_URI
+        sync: false
+      - key: TOKEN_ENCRYPTION_KEY
+        generateValue: true
+      - key: QIANCHUAN_CLIENT_API_KEY
+        generateValue: true
+      - key: QIANCHUAN_ENABLE_CONTROL
+        value: "false"
+      - key: ALLOWED_ORIGINS
+        sync: false
+    disk:
+      name: qianchuan-data
+      mountPath: /app/server/data
+      sizeGB: 1
